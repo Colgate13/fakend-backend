@@ -12,7 +12,7 @@ routes.use(UsersRoutes);
 routes.use("/", (req, res) => {
     console.log(`Server > Acess in ${req.originalUrl} - ${req.method} STATUS: ${res.statusCode}`);
     res.send({
-        message: "Hello World"
+        message: "All routes are working"
     })
 });
 
