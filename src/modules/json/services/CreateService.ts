@@ -1,4 +1,4 @@
-import Query, { ICreateJson } from '../../shared/infra/database/Query';
+import Query, { ICreateJson } from '../../shared/infra/firebase/Query';
 import { createUuid } from '../../shared/utils/Uuid';
 
 export default class CreateService {

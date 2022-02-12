@@ -1,5 +1,5 @@
 import db from './index';
-import { collection, getDocs, getDoc, addDoc, query, orderBy } from "firebase/firestore";
+import { collection, getDocs, getDoc, addDoc, query, where } from "firebase/firestore";
 
 export interface ICreateJson {
     name: string;
@@ -27,6 +27,15 @@ export default class Query {
         return (await getDocs(jsonQuery)).docs;
     }
 
+    protected async GETJson(route: string): Promise<any> {
+        const jsonQuery = query(
+            collection(db, `users/${this.userId}/json`),
+            where('route', '==', route)
+        );
+
+        return (await getDocs(jsonQuery)).docs;
+    }
+
     protected async CREATEJson(jsonId: string, {
         name, json, route
     }: ICreateJson): Promise<any> {
@@ -44,6 +53,10 @@ export default class Query {
 
     public async getAllJsons(): Promise<any> {
         return await this.GETallJsons();
+    }
+
+    public async getJson(route: string): Promise<any> {
+        return await this.GETJson(route);
     }
 
     public async createJson(jsonId: string, {
