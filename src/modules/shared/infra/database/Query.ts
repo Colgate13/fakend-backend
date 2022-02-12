@@ -1,5 +1,5 @@
 import db from './index';
-import { collection, getDocs, getDoc, addDoc } from "firebase/firestore";
+import { collection, getDocs, getDoc, addDoc, query, orderBy } from "firebase/firestore";
 
 export interface ICreateJson {
     name: string;
@@ -19,12 +19,15 @@ export default class Query {
         return await getDocs(userQuery);
     }
 
-    protected async GETJson(jsonId: string): Promise<any> {
-        const jsonQuery = collection(db, `users/${this.userId}/${jsonId}`);
-        return await getDocs(jsonQuery);
+    protected async GETallJsons(): Promise<any> {
+        const jsonQuery = query(
+            collection(db, `users/${this.userId}/json`)
+        );
+
+        return (await getDocs(jsonQuery)).docs;
     }
 
-    protected async CreateJson(jsonId: string, {
+    protected async CREATEJson(jsonId: string, {
         name, json, route
     }: ICreateJson): Promise<any> {
         return await addDoc(collection(db, `users/${this.userId}/json`), {
@@ -35,19 +38,18 @@ export default class Query {
         });
     }
 
-
     public async getUser(): Promise<any> {
         return await this.GETUser();
     }
 
-    public async getJson(jsonId: string): Promise<any> {
-        return await this.GETJson(jsonId);
+    public async getAllJsons(): Promise<any> {
+        return await this.GETallJsons();
     }
 
     public async createJson(jsonId: string, {
         name, json, route
     }: ICreateJson): Promise<any> {
-        return await this.CreateJson(jsonId, {
+        return await this.CREATEJson(jsonId, {
             name, json, route
         });
     }

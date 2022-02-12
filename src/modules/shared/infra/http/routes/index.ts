@@ -1,13 +1,13 @@
 import {
     Router
 } from "express";
-import UsersRoutes from '../../../../users/infra/routes/index'
+import JsonRoutes from '../../../../json/infra/routes/index'
 
 export const routesCreator = Router();
 
 const routes = Router();
 
-routes.use(UsersRoutes);
+routes.use(JsonRoutes);
 
 routes.use("/", (req, res) => {
     console.log(`Server > Acess in ${req.originalUrl} - ${req.method} STATUS: ${res.statusCode}`);
@@ -15,6 +15,5 @@ routes.use("/", (req, res) => {
         message: "All routes are working"
     })
 });
-
 
 export default routes;
