@@ -21,7 +21,8 @@ class CreateController {
             json
         });
 
-        console.log(create)
+        // console.log(create)
+
         if (!create) {
             return response.status(200).json({
                 error: "Endpoint not created",
