@@ -1,8 +1,8 @@
-import Query from '../../shared/infra/firebase/Query';
+import Query from '../../shared/infra/firebase/Query/Query';
 
 export default class JsonReadService {
     public async getAllJson(): Promise<any> {
-        const query = new Query('J4UY0wTa9q5cG2oicXBB');
+        const query = new Query('JocwumsxBxJxXgf1DrsC');
 
         const Datajsons = await query.getAllJsons();
 

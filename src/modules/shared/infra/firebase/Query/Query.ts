@@ -1,4 +1,4 @@
-import db from './index';
+import { db } from '../index';
 import { collection, getDocs, getDoc, addDoc, query, where } from "firebase/firestore";
 
 export interface ICreateJson {

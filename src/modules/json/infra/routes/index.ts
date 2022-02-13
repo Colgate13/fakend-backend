@@ -11,13 +11,14 @@ const readJsonController = new ReadJsonController();
 routes.post('/json/create', createController.execute);
 
 routes.get("/json/list", readJsonController.getAllJson);
+routes.get("/json", readJsonController.getAllJson);
 
 routes.all("/json/:IdUser/*", readJsonController.getJson);
 
 routes.get("/json", (req, res) => {
     console.log(`Server > Acess in ${req.originalUrl}-${req.method} STATUS: ${res.statusCode}`);
     res.send({
-        message: "Users routes"
+        message: "json routes"
     })
 });
 
