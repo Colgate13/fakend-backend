@@ -24,7 +24,7 @@ class CreateController {
         console.log(create)
         if (!create) {
             return response.status(200).json({
-                error: "Endpoint created",
+                error: "Endpoint not created",
                 create
             });
         }
@@ -32,7 +32,7 @@ class CreateController {
 
         return response.status(200).json({
             message: "Endpoint created",
-            create
+            create: create.id
         });
 
     }
