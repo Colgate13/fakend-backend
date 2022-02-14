@@ -19,7 +19,8 @@ class CreateController {
             email, password
         );
 
-        console.log(createUser)
+        //console.log(createUser)
+
         if (!createUser) {
             return response.status(200).json({
                 error: "User not created",

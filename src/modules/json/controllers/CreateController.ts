@@ -7,6 +7,7 @@ class CreateController {
         response: Response): Promise<any> {
 
         const { json, name, route } = request.body;
+        const userUid = request.user.uid;
 
         if (!json || !name || !route) {
             return response.status(400).json({
@@ -15,7 +16,7 @@ class CreateController {
         }
 
         const createService = new CreateService();
-        const create = await createService.create({
+        const create = await createService.create(userUid, {
             name,
             route,
             json

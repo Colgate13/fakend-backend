@@ -1,4 +1,4 @@
-import { auth } from '../index';
+import { auth, adminAuth } from '../index';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 export interface ICreateUser {
@@ -14,6 +14,10 @@ export default class Auth {
 
     public async signInEmailAndPassword(email: string, password: string): Promise<any> {
         return await signInWithEmailAndPassword(auth, email, password);
+    }
+
+    public async verifyToken(token: string): Promise<any> {
+        return await adminAuth.verifyIdToken(token);
     }
 
 }

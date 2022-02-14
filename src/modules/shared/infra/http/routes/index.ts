@@ -12,7 +12,7 @@ routes.use(JsonRoutes);
 routes.use(UserRoutes);
 
 routes.use("/", (req, res) => {
-    console.log(`Server > Acess in ${req.originalUrl} - ${req.method} STATUS: ${res.statusCode}`);
+    // console.log(`Server > Acess in ${req.originalUrl} - ${req.method} STATUS: ${res.statusCode}`);
     res.send({
         message: "All routes are working"
     })

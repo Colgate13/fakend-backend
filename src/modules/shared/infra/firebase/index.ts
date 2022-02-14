@@ -2,6 +2,16 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
+
+import { initializeApp as AdminInitializeApp, applicationDefault, getApp } from 'firebase-admin/app';
+import { getAuth as AdminGetAuth } from "firebase-admin/auth";
+
+
+AdminInitializeApp({
+    credential: applicationDefault(),
+    databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
+});
+
 const firebaseConfig = {
     apiKey: "AIzaSyDv6X04Jv-BBu0jdPjV2Hh-h1nKaf_sMks",
     authDomain: "fakend-backend.firebaseapp.com",
@@ -16,3 +26,5 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 
+const adminApp = getApp();
+export const adminAuth = AdminGetAuth(adminApp);

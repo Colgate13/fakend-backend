@@ -19,7 +19,7 @@ class CreateController {
             email, password
         );
 
-        console.log(signIn)
+        // console.log(signIn)
 
         if (!signIn) {
             return response.status(200).json({

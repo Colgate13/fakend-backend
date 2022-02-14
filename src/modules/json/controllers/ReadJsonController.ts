@@ -6,10 +6,10 @@ class ReadJsonController {
         request: Request,
         response: Response): Promise<any> {
 
-        const user = "J4UY0wTa9q5cG2oicXBB";
+        const userUid = request.user.uid;
 
         const jsonReadService = new JsonReadService();
-        const data = await jsonReadService.getAllJson();
+        const data = await jsonReadService.getAllJson(userUid);
 
 
         if (!data) {
@@ -28,8 +28,8 @@ class ReadJsonController {
         const { IdUser } = request.params;
         const route = request.path.replace(`/json/${IdUser}`, '');
 
-        console.log(`IdUser => ${IdUser}`);
-        console.log(`Route => ${route}`);
+        //  console.log(`IdUser => ${IdUser}`);
+        // console.log(`Route => ${route}`);
 
         const jsonReadService = new JsonReadService();
 

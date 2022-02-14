@@ -13,7 +13,7 @@ routes.post('/user/create', createUserController.execute);
 routes.post('/user/signin', signInUserController.execute);
 
 routes.get("/user", (req, res) => {
-    console.log(`Server > Acess in ${req.originalUrl}-${req.method} STATUS: ${res.statusCode}`);
+    // console.log(`Server > Acess in ${req.originalUrl}-${req.method} STATUS: ${res.statusCode}`);
     res.send({
         message: "Users routes"
     })
