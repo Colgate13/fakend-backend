@@ -23,9 +23,9 @@ class ServerHttp {
   }
 
   routes() {
-    this.app.use(routes)
+    this.app.use(routes);
   }
-};
 
+}
 export default ServerHttp;
 
