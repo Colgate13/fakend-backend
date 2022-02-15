@@ -1,19 +1,15 @@
-<h1 align="center">fakend-backend</h1>
+<h1 align="center">Fakend-backend</h1>
 
 <p align="center">
   <a href="#technologies-">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-Project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#installation-and-run">Installation and run</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#usage-programs">Usage programs</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#apirestfull-documentation">ApiRestFull documentation</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#license">License</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-
 </p>
 
 <br>
 
 ## Technologies 🐱‍🏍🎂
-- yarn and npm
+- [NPM](https://www.npmjs.com/)
 - [Express](https://expressjs.com/pt-br/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [JWT](https://jwt.io/)
