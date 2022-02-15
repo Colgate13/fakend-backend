@@ -21,7 +21,7 @@
 A website made by developers for developers, with our tool you will be able to simulate a Back End to be able to test your interface without the need to create an entire API.## Installation and run
 
 ```yarn 
-git clone https://github.com/Colgate13/bank-fluffly-backend.git
+git clone https://github.com/SmartsFields/fakend-backend.git
 npm ci i
 npm run-script dev
 $ > Server is running in 3000!
