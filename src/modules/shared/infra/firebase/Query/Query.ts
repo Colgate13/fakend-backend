@@ -1,11 +1,24 @@
 import { db } from '../index';
-import { collection, getDocs, getDoc, addDoc, query, where } from "firebase/firestore";
+import { collection, getDocs, getDoc, addDoc, query, where, doc, setDoc } from "firebase/firestore";
+
+export interface ICreateUser {
+    id?: string;
+    email: string;
+    name?: string;
+    ProfileImage?: string;
+}
 
 export interface ICreateJson {
     name: string;
     route: string;
     json: object;
 }
+/***
+ * 
+const cityRef = doc(db, 'cities', 'BJ');
+setDoc(cityRef, { capital: true }, { merge: true });
+ * 
+ */
 
 export default class Query {
     protected userId: string;
@@ -13,6 +26,21 @@ export default class Query {
     constructor(userId: string) {
         this.userId = userId;
     }
+
+    protected async CREATEUser({ name, email, ProfileImage }: ICreateUser): Promise<any> {
+        const user = doc(db, 'users', this.userId);
+
+        const userName = name !== undefined ? name : this.userId;
+
+        const userData = {
+            uid: this.userId,
+            name: userName,
+            email,
+        }
+
+        return await setDoc(user, userData);
+    }
+
 
     protected async GETUser(): Promise<any> {
         const userQuery = collection(db, `users/${this.userId}`);
@@ -45,6 +73,10 @@ export default class Query {
             route: route,
             json: json
         });
+    }
+
+    public async createUser(user: ICreateUser): Promise<any> {
+        return await this.CREATEUser(user);
     }
 
     public async getUser(): Promise<any> {

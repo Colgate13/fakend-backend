@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--  Esse meta é importante, METE O META NA HEAD POHA -->
+    <meta name="google-signin-client_id"
+        content="83609409125-uch2oq4dolt20uksahgvh7uobvla2mjd.apps.googleusercontent.com">
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        function SendGoogleUserToBackEnd(googleUser) {
+            //Create a fetch request to send the user to the backend
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(googleUser)
+            };
+            fetch('/user/signin/google', requestOptions)
+                .then(response => {
+                    response.json()
+
+                    console.log(response.json())
+
+                    const name = document.getElementById('name');
+
+                    name.innerHTML = "data.name";
+                });
+        }
+
+
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            var id_token = googleUser.getAuthResponse().id_token;
+            //console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            //console.log('Name: ' + profile.getName());
+            //console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            console.log('Id_token: ' + id_token); // This is null if the 'email' scope is not present.
+            SendGoogleUserToBackEnd(googleUser);
+        }
+    </script>
+    <title>Google SigIn</title>
+</head>
+
+<body>
+    <h1>
+        Por favor faça o login no nosso sistemas
+    </h1>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+    <div>
+        <h1>
+            Bem vindo ao nosso sistema
+            <p>Senhor: </p>
+            <p name="name"></p>
+        </h1>
+    </div>
+</body>
+
+</html>
