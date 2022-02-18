@@ -1,25 +1,22 @@
 import { Response, Request } from 'express';
-import CreateUserService from "../services/CreateUserService";
+import SignInUserService from "../services/SignInUserService";
 
 class CreateController {
     public async execute(
         request: Request,
         response: Response): Promise<any> {
 
-        const { email, password } = request.body;
+        const googleUser = <any>request.body;
 
-        if (!email || !password) {
+        if (!googleUser || !googleUser.wc.id_token) {
             return response.status(400).json({
-                error: "Missing email or password"
+                error: "Missing googleUser"
             });
         }
 
-        const createUserService = new CreateUserService();
-        const createUser = await createUserService.createWithMail(
-            email, password
-        );
+        const signInUserService = new SignInUserService();
 
-        //console.log(createUser)
+        const createUser = await signInUserService.sigInWithCredentials(googleUser);
 
         if (!createUser) {
             return response.status(200).json({
@@ -28,10 +25,9 @@ class CreateController {
             });
         }
 
-
         return response.status(200).json({
-            message: "User created",
-            create: createUser.id
+            message: "User SigIn With Google",
+            createUser
         });
 
     }
