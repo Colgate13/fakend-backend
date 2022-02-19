@@ -16,18 +16,18 @@ class CreateController {
 
         const signInUserService = new SignInUserService();
 
-        const createUser = await signInUserService.sigInWithCredentials(googleUser);
+        const SigIn = await signInUserService.sigInWithCredentials(googleUser);
 
-        if (!createUser) {
+        if (!SigIn) {
             return response.status(200).json({
                 error: "User not created",
-                createUser
+                SigIn
             });
         }
 
         return response.status(200).json({
             message: "User SigIn With Google",
-            createUser
+            token: SigIn
         });
 
     }

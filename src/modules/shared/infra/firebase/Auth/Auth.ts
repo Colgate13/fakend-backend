@@ -4,7 +4,7 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signInWithCredential,
-    GoogleAuthProvider
+    GoogleAuthProvider,
 } from "firebase/auth";
 
 export interface AuthCredentials extends AuthCredential { }
@@ -37,13 +37,11 @@ export default class Auth {
 
     public async sigInWithCredential(googleUser: any): Promise<any> {
 
-        console.log(googleUser);
-
         // Build Firebase credential with the Google ID token.
         const credential = GoogleAuthProvider.credential(googleUser.wc.id_token);
 
         // Sign in with credential from the Google user.
-        signInWithCredential(auth, credential).catch((error) => {
+        const user = await signInWithCredential(auth, credential).catch((error) => {
             // Handle Errors here.
             const errorCode = error.code;
             const errorMessage = error.message;
@@ -55,7 +53,24 @@ export default class Auth {
             throw Error("Google auth error")
         });
 
-        return credential;
+        // const uuid = (await user).user.uid;
+
+        // const additionalClaims = {
+        //     premiumAccount: false,
+        //     adminAccount: false,
+
+        // };
+
+        // const authas = adminAuth.createCustomToken(uuid, additionalClaims).then((customToken) => {
+        //     // Send token back to client
+        //     return customToken;
+        // })
+
+        //console.log((await user.user.getIdTokenResult()).token);
+
+        const token = (await user.user.getIdTokenResult()).token;
+
+        return token;
     }
 
     public async signInEmailAndPassword(email: string, password: string): Promise<any> {
