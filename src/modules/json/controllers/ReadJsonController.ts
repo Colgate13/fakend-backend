@@ -53,7 +53,7 @@ class ReadJsonController {
             });
         }
 
-        return response.status(200).json(data[0]);
+        return response.status(200).json(data);
     }
 }
 

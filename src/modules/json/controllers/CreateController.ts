@@ -15,11 +15,13 @@ class CreateController {
             });
         }
 
+        const jsonAux = JSON.stringify(json);
+
         const createService = new CreateService();
         const create = await createService.create(userUid, {
             name,
             route,
-            json
+            json: jsonAux
         });
 
         // console.log(create)
@@ -31,12 +33,10 @@ class CreateController {
             });
         }
 
-
         return response.status(200).json({
             message: "Endpoint created",
             create: create.id
         });
-
     }
 }
 

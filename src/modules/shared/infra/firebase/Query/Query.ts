@@ -11,7 +11,7 @@ export interface ICreateUser {
 export interface ICreateJson {
     name: string;
     route: string;
-    json: object;
+    json: any;
 }
 /***
  * 
