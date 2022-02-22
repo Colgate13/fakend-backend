@@ -15,7 +15,7 @@ routes.use(UserRoutes);
 
 // sendFile will go here
 routes.get('/home', function (req, res) {
-    res.sendFile(path.join(__dirname, '../web/index.html'));
+    res.sendFile(path.join(__dirname, '../../../../../../web/index.html'));
 });
 
 routes.use("/", (req, res) => {

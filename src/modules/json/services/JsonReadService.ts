@@ -24,11 +24,10 @@ export default class JsonReadService {
 
         const Datajsons = await query.getJson(route);
 
-        const jsons = Datajsons.map((doc: any) => {
-            return doc.data().json
-
-        });
-
-        return jsons
+        try {
+            return JSON.parse(Datajsons[0].data().json);
+        } catch (error) {
+            return Datajsons[0].data().json;
+        }
     }
 }
