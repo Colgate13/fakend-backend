@@ -1,4 +1,5 @@
 import { Response, Request } from 'express';
+import AppError from '../../../errors/AppError';
 import SignInUserService from "../services/SignInUserService";
 
 class CreateController {
@@ -9,9 +10,7 @@ class CreateController {
         const googleUser = <any>request.body;
 
         if (!googleUser || !googleUser.wc.id_token) {
-            return response.status(400).json({
-                error: "Missing googleUser"
-            });
+            throw new AppError("Missing googleUser", 400, 'warn');
         }
 
         const signInUserService = new SignInUserService();
@@ -19,10 +18,7 @@ class CreateController {
         const SigIn = await signInUserService.sigInWithCredentials(googleUser);
 
         if (!SigIn) {
-            return response.status(200).json({
-                error: "User not created",
-                SigIn
-            });
+            throw new AppError("Password or email is wrong", 400, 'warn');
         }
 
         return response.status(200).json({

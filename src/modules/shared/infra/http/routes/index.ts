@@ -1,7 +1,10 @@
 import {
     Router
 } from "express";
+import 'express-async-errors';
 import path from 'path';
+
+import GlobalErrorHandler from '../middlewares/GlobalErrorHandler';
 
 import JsonRoutes from '../../../../json/infra/routes/index'
 import UserRoutes from '../../../../users/infra/routes/index'
@@ -24,5 +27,7 @@ routes.use("/", (req, res) => {
         message: "All routes are working"
     })
 });
+
+routes.use(GlobalErrorHandler);
 
 export default routes;

@@ -1,3 +1,5 @@
+import * as Yup from 'yup';
+import AppError from '../../../errors/AppError';
 import { Response, Request } from 'express';
 import SignInUserService from "../services/SignInUserService";
 
@@ -8,24 +10,27 @@ class CreateController {
 
         const { email, password } = request.body;
 
-        if (!email || !password) {
-            return response.status(400).json({
-                error: "Missing email or password"
-            });
-        }
+        const schema = Yup.object().shape({
+            email: Yup.string().required('E-mail is required').email('Invalid email'),
+            password: Yup.string().required('Password is required')
+        });
+
+        await schema.validate({
+            email,
+            password
+        }, {
+            abortEarly: false,
+        }).catch((err) => {
+            throw new AppError(err.errors[0], 400, 'warn');
+        });
 
         const signInUserService = new SignInUserService();
         const signIn = await signInUserService.create(
             email, password
         );
 
-        // console.log(signIn)
-
         if (!signIn) {
-            return response.status(200).json({
-                error: "Password or email is wrong",
-                signIn
-            });
+            throw new AppError("Password or email is wrong", 400, 'warn');
         }
 
         const { user } = signIn;
@@ -36,7 +41,6 @@ class CreateController {
             uid: user.uid,
             token: user.accessToken
         });
-
     }
 }
 

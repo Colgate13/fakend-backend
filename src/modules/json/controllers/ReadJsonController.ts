@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
 import JsonReadService from "../services/JsonReadService";
-
+import AppError from '../../../errors/AppError';
 class ReadJsonController {
     public async getAllJson(
         request: Request,
@@ -11,11 +11,8 @@ class ReadJsonController {
         const jsonReadService = new JsonReadService();
         const data = await jsonReadService.getAllJson(userUid);
 
-
         if (!data) {
-            return response.status(200).json({
-                error: "Error",
-            });
+            throw new AppError("No json found for received data", 404, 'warn');
         }
 
         return response.status(200).json(data);
@@ -28,29 +25,20 @@ class ReadJsonController {
         const { IdUser } = request.params;
         const route = request.path.replace(`/json/${IdUser}`, '');
 
-        //  console.log(`IdUser => ${IdUser}`);
-        // console.log(`Route => ${route}`);
-
         const jsonReadService = new JsonReadService();
 
         const data = await jsonReadService.getJson(IdUser, route);
 
         if (!data) {
-            return response.status(200).json({
-                error: "Error",
-            });
+            throw new AppError("No json found for received data", 404, 'warn');
         }
 
         if (data.length === 0) {
-            return response.status(200).json({
-                message: "Nenhuma rota definida para o path informado",
-            });
+            throw new AppError("Nenhuma rota definida para o path informado", 404, 'warn');
         }
 
         if (data.length > 1) {
-            return response.status(200).json({
-                message: "Multiplas rodas definidas para o path informado",
-            });
+            throw new AppError("Multiplas rotas definidas para o path informado", 418, 'warn');
         }
 
         return response.status(200).json(data);
