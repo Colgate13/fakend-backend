@@ -1,7 +1,30 @@
 import { Response, Request } from 'express';
 import JsonReadService from "../services/JsonReadService";
 import AppError from '../../../errors/AppError';
+
 class ReadJsonController {
+    public async getJsonDatas(
+        request: Request,
+        response: Response): Promise<any> {
+
+        const userUid = request.user.uid;
+
+        const { jsonId } = request.params;
+
+        if (!jsonId) {
+            throw new AppError("JsonId is required", 400, 'warn');
+        }
+
+        const jsonReadService = new JsonReadService();
+        const data = await jsonReadService.getJsonDatas(jsonId, userUid);
+
+        if (!data) {
+            throw new AppError("No json found for received data", 404, 'warn');
+        }
+
+        return response.status(200).json(data[0]);
+    }
+
     public async getAllJson(
         request: Request,
         response: Response): Promise<any> {
