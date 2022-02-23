@@ -1,3 +1,5 @@
+import * as Yup from 'yup';
+import AppError from '../../../errors/AppError';
 import { Response, Request } from 'express';
 import CreateService from "../services/CreateService";
 
@@ -9,11 +11,19 @@ class CreateController {
         const { json, name, route } = request.body;
         const userUid = request.user.uid;
 
-        if (!json || !name || !route) {
-            return response.status(400).json({
-                error: "Missing json, name or route"
-            });
-        }
+        const schema = Yup.object().shape({
+            name: Yup.string().required('Name is required'),
+            route: Yup.string().required('Route is required')
+        });
+
+        await schema.validate({
+            name,
+            route
+        }, {
+            abortEarly: false,
+        }).catch((err) => {
+            throw new AppError(err.errors[0], 400, 'warn');
+        });
 
         const jsonAux = JSON.stringify(json);
 
@@ -24,13 +34,8 @@ class CreateController {
             json: jsonAux
         });
 
-        // console.log(create)
-
         if (!create) {
-            return response.status(200).json({
-                error: "Endpoint not created",
-                create
-            });
+            throw new AppError("Endpoint not created", 400, 'error');
         }
 
         return response.status(200).json({
