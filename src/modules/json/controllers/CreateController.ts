@@ -8,7 +8,7 @@ class CreateController {
         request: Request,
         response: Response): Promise<any> {
 
-        const { json, name, route } = request.body;
+        const { json, name, route, method } = request.body;
         const userUid = request.user.uid;
 
         const schema = Yup.object().shape({
@@ -31,7 +31,8 @@ class CreateController {
         const create = await createService.create(userUid, {
             name,
             route,
-            json: jsonAux
+            json: jsonAux,
+            method
         });
 
         if (!create) {

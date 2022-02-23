@@ -12,6 +12,7 @@ export interface ICreateJson {
     name: string;
     route: string;
     json: any;
+    method?: string;
 }
 /***
  * 
@@ -55,6 +56,15 @@ export default class Query {
         return (await getDocs(jsonQuery)).docs;
     }
 
+    protected async GETJsonData(id: string): Promise<any> {
+        const jsonQuery = query(
+            collection(db, `users/${this.userId}/json`),
+            where('id', '==', id)
+        );
+
+        return (await getDocs(jsonQuery)).docs;
+    }
+
     protected async GETJson(route: string): Promise<any> {
         const jsonQuery = query(
             collection(db, `users/${this.userId}/json`),
@@ -65,13 +75,14 @@ export default class Query {
     }
 
     protected async CREATEJson(jsonId: string, {
-        name, json, route
+        name, json, route, method
     }: ICreateJson): Promise<any> {
         return await addDoc(collection(db, `users/${this.userId}/json`), {
             id: jsonId,
             name: name,
             route: route,
-            json: json
+            json: json,
+            method: method
         });
     }
 
@@ -87,15 +98,19 @@ export default class Query {
         return await this.GETallJsons();
     }
 
+    public async getJsonData(id: string): Promise<any> {
+        return await this.GETJsonData(id);
+    }
+
     public async getJson(route: string): Promise<any> {
         return await this.GETJson(route);
     }
 
     public async createJson(jsonId: string, {
-        name, json, route
+        name, json, route, method
     }: ICreateJson): Promise<any> {
         return await this.CREATEJson(jsonId, {
-            name, json, route
+            name, json, route, method
         });
     }
 

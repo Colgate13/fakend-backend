@@ -10,6 +10,7 @@ const createController = new CreateController();
 const readJsonController = new ReadJsonController();
 
 routes.post('/json/create', middlewares, createController.execute);
+routes.get('/json/get/:jsonId', middlewares, readJsonController.getJsonDatas);
 
 routes.get("/json/list", middlewares, readJsonController.getAllJson);
 routes.get("/json", middlewares, readJsonController.getAllJson);
