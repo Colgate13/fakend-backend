@@ -8,7 +8,8 @@ import { getAuth as AdminGetAuth } from "firebase-admin/auth";
 
 
 AdminInitializeApp({
-    credential: applicationDefault(),
+    serviceAccountId: "83609409125-uch2oq4dolt20uksahgvh7uobvla2mjd.apps.googleusercontent.com",
+    projectId: "fakend-backend",
     databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
 });
 
