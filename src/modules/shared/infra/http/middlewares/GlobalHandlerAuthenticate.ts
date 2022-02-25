@@ -29,20 +29,6 @@ export default async function GlobalHandlerAuthenticate(
 
     const decodedToken: JwtPayload = await auth.verifyToken(token);
 
-    // try {
-    //     decodedToken = verify(token, token1)
-    // } catch (error) {
-    //     try {
-    //         decodedToken = verify(token, token2)
-    //     } catch (error) {
-    //         try {
-    //             decodedToken = verify(token, token3)
-    //         } catch (error) {
-    //             throw new AppError('TOKEN IS INVALID', 401);
-    //         }
-    //     }
-    // }
-
     if (!decodedToken || !decodedToken.sub) {
         throw new AppError('TOKEN IS INVALID', 401);
     }
@@ -51,7 +37,7 @@ export default async function GlobalHandlerAuthenticate(
         uid: decodedToken.sub
     }
 
-    console.log(request.user)
+    console.log("request.user => ", request.user)
     return next();
 
 }

@@ -1,11 +1,11 @@
-import Query from '../../shared/infra/firebase/Query/Query';
+import QueryGetters from '../../shared/infra/firebase/Query/QueryGetters';
 
 export default class JsonReadService {
     public async getJsonDatas(jsonId: string, userUid: string): Promise<any> {
-        const query = new Query(userUid);
+        const queryGetters = new QueryGetters(userUid);
 
-        const Datajsons = await query.getJsonData(jsonId);
-        console.log(Datajsons)
+        const Datajsons = await queryGetters.getJsonData(jsonId);
+
         const jsons = Datajsons.map((doc: any) => {
             return {
                 doc: doc.id,
@@ -20,9 +20,9 @@ export default class JsonReadService {
     }
 
     public async getAllJson(userUid: string): Promise<any> {
-        const query = new Query(userUid);
+        const queryGetters = new QueryGetters(userUid);
 
-        const Datajsons = await query.getAllJsons();
+        const Datajsons = await queryGetters.getAllJsons();
 
         const jsons = Datajsons.map((doc: any) => {
             return {
@@ -38,9 +38,9 @@ export default class JsonReadService {
     }
 
     public async getJson(userUid: string, route: string): Promise<any> {
-        const query = new Query(userUid);
+        const queryGetters = new QueryGetters(userUid);
 
-        const Datajsons = await query.getJson(route);
+        const Datajsons = await queryGetters.getJson(route);
 
         try {
             return JSON.parse(Datajsons[0].data().json);
