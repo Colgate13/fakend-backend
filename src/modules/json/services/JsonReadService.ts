@@ -6,17 +6,7 @@ export default class JsonReadService {
 
         const Datajsons = await queryGetters.getJsonData(jsonId);
 
-        const jsons = Datajsons.map((doc: any) => {
-            return {
-                doc: doc.id,
-                id: doc.data().id,
-                name: doc.data().name,
-                route: doc.data().route,
-                json: doc.data().json
-            }
-        });
-
-        return jsons
+        return Datajsons
     }
 
     public async getAllJson(userUid: string): Promise<any> {
