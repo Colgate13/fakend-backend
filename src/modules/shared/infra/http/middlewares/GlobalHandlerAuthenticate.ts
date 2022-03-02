@@ -26,8 +26,9 @@ export default async function GlobalHandlerAuthenticate(
 
     //let decodedToken: string | JwtPayload;
 
-
-    const decodedToken: JwtPayload = await auth.verifyToken(token);
+    const decodedToken: JwtPayload = await auth.verifyToken(token).catch(() => {
+        throw new AppError('TOKEN IS INVALID', 401);
+    });
 
     if (!decodedToken || !decodedToken.sub) {
         throw new AppError('TOKEN IS INVALID', 401);

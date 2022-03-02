@@ -41,7 +41,7 @@ class CreateController {
 
         return response.status(200).json({
             message: "Endpoint created",
-            create: create.id
+            create: create
         });
     }
 }

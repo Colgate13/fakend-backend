@@ -1,4 +1,5 @@
-import QueryGetters, { ICreateJson } from '../../shared/infra/firebase/Query/QueryGetters';
+import QueryGetters from '../../shared/infra/firebase/Query/QueryGetters';
+import { ICreateJson } from '../../shared/infra/firebase/Query/interfaces/Ijson';
 import { createUuid } from '../../shared/utils/Uuid';
 
 export default class CreateService {
@@ -13,6 +14,6 @@ export default class CreateService {
             method: method
         });
 
-        return create
+        return create;
     }
 }

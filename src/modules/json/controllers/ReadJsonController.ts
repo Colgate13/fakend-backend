@@ -22,7 +22,7 @@ class ReadJsonController {
             throw new AppError("No json found for received data", 404, 'warn');
         }
 
-        return response.status(200).json(data[0]);
+        return response.status(200).json(data);
     }
 
     public async getAllJson(
