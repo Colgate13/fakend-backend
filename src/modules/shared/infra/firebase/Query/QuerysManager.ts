@@ -1,5 +1,5 @@
 import { db } from '../index';
-import { collection, getDocs, updateDoc, addDoc, query, where, doc, setDoc } from "firebase/firestore";
+import { collection, getDocs, updateDoc, getDoc, query, where, doc, setDoc } from "firebase/firestore";
 
 export interface ICreateUser {
     id?: string;
@@ -54,15 +54,22 @@ export default class QuerysManager {
     }
 
     protected async GETJsonData(id: string): Promise<any> {
-        const jsonQuery = query(
-            collection(db, `users/${this.userId}/json`),
-            where('id', '==', id)
+
+        const json = await getDoc(
+            doc(
+                db,
+                "users",
+                this.userId,
+                "json",
+                id
+            )
         );
 
-        return (await getDocs(jsonQuery)).docs;
+        return await json.data()
     }
 
     protected async GETJson(route: string): Promise<any> {
+
         const jsonQuery = query(
             collection(db, `users/${this.userId}/json`),
             where('route', '==', route)
@@ -75,13 +82,27 @@ export default class QuerysManager {
         name, json, route, method
     }: ICreateJson): Promise<any> {
 
-        return await setDoc(doc(db, `users/${this.userId}/json/${jsonId}`), {
+        const docJson = doc(db, `users/${this.userId}/json/${jsonId}`);
+
+        return await setDoc(docJson, {
             id: jsonId,
             name: name,
             route: route,
             json: json,
             method: method
-        });
+        }).catch((err) => {
+            console.log("Json dont created, error code: 8888", err);
+        }).then(async () => {
+
+            console.log("Json created");
+
+            const docRef = doc(db, "users", this.userId, "json", jsonId);
+            const docSnap = await getDoc(docRef)
+
+            console.log(docSnap.data());
+
+            return docSnap.data(); // return json data
+        })
     }
 
     protected async EDITJson(jsonId: string, data: IEditJson): Promise<any> {
