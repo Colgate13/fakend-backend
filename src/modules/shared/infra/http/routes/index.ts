@@ -6,8 +6,8 @@ import path from 'path';
 
 import GlobalErrorHandler from '../middlewares/GlobalErrorHandler';
 
-import JsonRoutes from '../../../../json/infra/routes/index'
-import UserRoutes from '../../../../users/infra/routes/index'
+import JsonRoutes from '../../../../json/infra/http/routes/index'
+import UserRoutes from '../../../../users/infra/http/routes/index'
 
 export const routesCreator = Router();
 

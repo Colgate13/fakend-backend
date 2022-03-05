@@ -1,3 +1,12 @@
+/**
+ * @Autor Gabriel Sa - github.com/colgate13
+ * 
+ * @Description Classe de erro padrão do sistema
+ * 
+ * @use throw new AppError(message?, statusCode?, type?)
+ */
+
+
 class AppError {
     public readonly message: string;
 

@@ -1,6 +1,19 @@
 import Query from './Query';
 
-export default class QueryGetters extends Query {
+/**
+ * @interface IQueryGetters
+ * @desc Responsável por trazer informações sobre jsons
+ **/
+
+export interface IQueryGetters {
+    getUser(): Promise<any>
+    getAllJsons(): Promise<any>
+    getJsonData(id: string): Promise<any>
+    getJson(route: string): Promise<any>
+}
+
+
+export class QueryGetters extends Query implements IQueryGetters {
 
     constructor(userId: string) {
         super(userId);

@@ -1,18 +1,23 @@
-import QueryGetters from '../../shared/infra/firebase/Query/QueryGetters';
+import { IQueryGetters } from '../../shared/infra/firebase/Query/QueryGetters';
 
 export default class JsonReadService {
-    public async getJsonDatas(jsonId: string, userUid: string): Promise<any> {
-        const queryGetters = new QueryGetters(userUid);
 
-        const Datajsons = await queryGetters.getJsonData(jsonId);
+    private QueryGetters: IQueryGetters;
+
+    constructor(QuerySetternsClass: IQueryGetters) {
+        this.QueryGetters = QuerySetternsClass;
+    }
+
+    public async getJsonDatas(jsonId: string): Promise<any> {
+
+        const Datajsons = await this.QueryGetters.getJsonData(jsonId);
 
         return Datajsons
     }
 
-    public async getAllJson(userUid: string): Promise<any> {
-        const queryGetters = new QueryGetters(userUid);
+    public async getAllJson(): Promise<any> {
 
-        const Datajsons = await queryGetters.getAllJsons();
+        const Datajsons = await this.QueryGetters.getAllJsons();
 
         const jsons = Datajsons.map((doc: any) => {
             return {
@@ -27,10 +32,11 @@ export default class JsonReadService {
         return jsons
     }
 
-    public async getJson(userUid: string, route: string): Promise<any> {
-        const queryGetters = new QueryGetters(userUid);
+    public async getJson(route: string, IdUser: string): Promise<any> {
 
-        const Datajsons = await queryGetters.getJson(route);
+        route = route.replace(`/json/${IdUser}`, '')
+
+        const Datajsons = await this.QueryGetters.getJson(route);
 
         try {
             return JSON.parse(Datajsons[0].data().json);

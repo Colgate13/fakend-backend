@@ -1,31 +1,49 @@
-import QuerySetterns from '../../shared/infra/firebase/Query/QuerySetterns';
+import { IQuerySetterns } from '../../shared/infra/firebase/Query/QuerySetterns';
 import { IEditJson } from '../../shared/infra/firebase/Query/interfaces/Ijson';
 
 export default class EditJsonService {
-    public async EditJsonDatas(jsonId: string, userUid: string, data: IEditJson): Promise<any> {
-        const querySetterns = new QuerySetterns(userUid);
 
-        try {
-            await querySetterns.editJson(jsonId, data);
+    private QuerySetterns: IQuerySetterns;
 
-            return {
-                type: 'success',
-                message: 'Json edited with success',
-                id: jsonId,
-                changes: {
-                    data
-                }
-            }
-        } catch (error) {
-            return {
-                type: 'error',
-                message: 'Don\'t edited json',
-                id: jsonId,
-                changes: {
-                    data
-                }
-            };
+    constructor(QuerySetternsClass: IQuerySetterns) {
+        this.QuerySetterns = QuerySetternsClass;
+    }
+
+    public async EditJsonDatas(jsonId: string, data: IEditJson): Promise<any> {
+
+        const { name, json, method, route }: IEditJson = data;
+
+        const dataJson: any = {
+            name, json, method, route
         }
 
+        let objUpdate: any = {}
+        Object.keys(dataJson).forEach((e) => {
+            if (dataJson[e] !== undefined && dataJson[e] !== null) {
+                objUpdate[e] = dataJson[e]
+            }
+        })
+
+
+        await this.QuerySetterns.editJson(jsonId, objUpdate).catch(err => {
+            return {
+                type: 'error',
+                message: 'Json dont edited',
+                id: jsonId,
+                changes: {
+                    objUpdate
+                }
+            };
+        });
+
+
+        return {
+            type: 'success',
+            message: 'Json edited with success',
+            id: jsonId,
+            changes: {
+                objUpdate
+            }
+        }
     }
 }
