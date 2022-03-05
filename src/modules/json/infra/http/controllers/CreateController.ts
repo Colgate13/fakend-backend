@@ -21,7 +21,7 @@ class CreateController {
             method
         });
 
-        return response.status(200).json(create);
+        return response.json(create);
     }
 }
 

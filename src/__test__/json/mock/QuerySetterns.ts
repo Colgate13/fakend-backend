@@ -44,3 +44,30 @@ export class QuerySetterns implements IQuerySetterns {
         };
     }
 }
+
+export class QuerySetternsNullReturn implements IQuerySetterns {
+
+    private userId: string;
+
+    constructor(userId: string) {
+        this.userId = userId;
+    }
+
+    public async createUser(user: ICreateUser): Promise<any> {
+        return user;
+    }
+
+    public async createJson(jsonId: string, {
+        name, json, route, method
+    }: ICreateJson): Promise<any> {
+
+        return undefined;
+    }
+
+    public async editJson(jsonId: string, data: IEditJson): Promise<any> {
+
+        return {
+            jsonId, data
+        };
+    }
+}

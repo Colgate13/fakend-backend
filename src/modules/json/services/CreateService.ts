@@ -1,3 +1,4 @@
+import * as Yup from 'yup';
 import AppError from '../../../errors/AppError';
 import { IQuerySetterns } from '../../shared/infra/firebase/Query/QuerySetterns';
 import { ICreateJson } from '../../shared/infra/firebase/Query/interfaces/Ijson';
@@ -12,6 +13,25 @@ export default class CreateService {
     }
 
     public async create({ name, route, json, method }: ICreateJson): Promise<any> {
+
+        // yup validation
+        const schema = Yup.object().shape({
+            name: Yup.string().required(),
+            route: Yup.string().required(),
+            json: Yup.object().required(),
+            method: Yup.string().required()
+        });
+
+        await schema.validate({
+            name,
+            route,
+            json,
+            method
+        }, {
+            abortEarly: false,
+        }).catch((err) => {
+            throw new AppError(err.errors[0], 400, 'warn');
+        });
 
         const jsonStringify = JSON.stringify(json);
 
