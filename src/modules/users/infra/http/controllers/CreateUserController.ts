@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
-import AppError from '../../../errors/AppError';
+import AppError from '../../../../../errors/AppError';
 import { Response, Request } from 'express';
-import CreateUserService from "../services/CreateUserService";
+import CreateUserService from "../../../services/CreateUserService";
 
 class CreateController {
     public async execute(

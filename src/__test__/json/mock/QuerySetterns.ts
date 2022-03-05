@@ -1,5 +1,4 @@
-import Query from './Query';
-import { ICreateJson, ICreateUser, IEditJson } from './interfaces/Ijson'
+import { ICreateJson, ICreateUser, IEditJson } from '../../../modules/shared/infra/firebase/Query/interfaces/Ijson'
 
 /**
  * @interface IQuerySetterns
@@ -13,27 +12,35 @@ export interface IQuerySetterns {
 }
 
 
-export class QuerySetterns extends Query implements IQuerySetterns {
+export class QuerySetterns implements IQuerySetterns {
+
+    private userId: string;
 
     constructor(userId: string) {
-        super(userId);
+        this.userId = userId;
     }
 
     public async createUser(user: ICreateUser): Promise<any> {
-        return await this.CREATEUser(user);
+        return user;
     }
 
     public async createJson(jsonId: string, {
         name, json, route, method
     }: ICreateJson): Promise<any> {
 
-        return await this.CREATEJson(jsonId, {
-            name, json, route, method
-        });
+        return {
+            id: '75a5d2f7-839e-4777-ad57-810f50113e26',
+            name: name,
+            route: route,
+            json: json,
+            method: method
+        };
     }
 
     public async editJson(jsonId: string, data: IEditJson): Promise<any> {
 
-        return await this.EDITJson(jsonId, data);
+        return {
+            jsonId, data
+        };
     }
 }

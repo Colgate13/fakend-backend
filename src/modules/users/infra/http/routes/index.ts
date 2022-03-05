@@ -2,9 +2,9 @@ import { Router } from 'express';
 
 const routes = Router();
 
-import CreateUserController from '../../controllers/CreateUserController';
-import SignInUserController from '../../controllers/SignInUserController';
-import SignInUserGoogleController from '../../controllers/SignInUserGoogleController';
+import CreateUserController from '../controllers/CreateUserController';
+import SignInUserController from '../controllers/SignInUserController';
+import SignInUserGoogleController from '../controllers/SignInUserGoogleController';
 
 const createUserController = new CreateUserController();
 const signInUserController = new SignInUserController();
