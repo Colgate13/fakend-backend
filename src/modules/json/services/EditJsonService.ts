@@ -1,5 +1,6 @@
 import { IQuerySetterns } from '../../shared/infra/firebase/Query/QuerySetterns';
 import { IEditJson } from '../../shared/infra/firebase/Query/interfaces/Ijson';
+import AppError from '../../../errors/AppError';
 
 export default class EditJsonService {
 
@@ -24,15 +25,17 @@ export default class EditJsonService {
             }
         })
 
+        if (objUpdate === {}) {
+            throw new AppError('Object to update are null', 400, 'warn');
+        }
+
 
         await this.QuerySetterns.editJson(jsonId, objUpdate).catch(err => {
             return {
                 type: 'error',
                 message: 'Json dont edited',
                 id: jsonId,
-                changes: {
-                    objUpdate
-                }
+                changes: objUpdate
             };
         });
 
@@ -41,9 +44,8 @@ export default class EditJsonService {
             type: 'success',
             message: 'Json edited with success',
             id: jsonId,
-            changes: {
-                objUpdate
-            }
+            changes: objUpdate
+
         }
     }
 }

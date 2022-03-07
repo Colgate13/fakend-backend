@@ -1,3 +1,4 @@
+import AppError from '../../../errors/AppError';
 import { ICreateJson, ICreateUser, IEditJson } from '../../../modules/shared/infra/firebase/Query/interfaces/Ijson'
 
 /**
@@ -66,8 +67,17 @@ export class QuerySetternsNullReturn implements IQuerySetterns {
 
     public async editJson(jsonId: string, data: IEditJson): Promise<any> {
 
-        return {
-            jsonId, data
-        };
+
+        const jsonList = [
+            '75a5d2f7-839e-4777-ad57-810f50113e26',
+            '75a5d2f7-839e-4777-ad57-810f50113e27',
+            '75a5d2f7-839e-4777-ad57-810f50113e28',
+        ]
+
+        if (jsonList.includes(jsonId)) {
+            return data;
+        }
+
+        throw new AppError('Json not found', 400);
     }
 }
