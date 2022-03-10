@@ -94,4 +94,26 @@ describe('Edit endpoint', () => {
 
 
     });
+
+    it("try edit JSON but without passing none data", async () => {
+
+        const jsonExpect = {
+            type: 'success',
+            message: 'Json edited with success',
+            id: '75a5d2f7-839e-4777-ad57-810f50113e26',
+            changes: {
+                json: {},
+            }
+        }
+
+        const editJsonService = new EditJsonService(new QuerySetterns('USER_ID'));
+
+        const editJson = await editJsonService.EditJsonDatas('75a5d2f7-839e-4777-ad57-810f50113e26', {
+            json: {},
+        });
+
+        expect(editJson).toEqual(jsonExpect);
+
+
+    });
 });
