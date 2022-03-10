@@ -4,8 +4,8 @@ export default class JsonReadService {
 
     private QueryGetters: IQueryGetters;
 
-    constructor(QuerySetternsClass: IQueryGetters) {
-        this.QueryGetters = QuerySetternsClass;
+    constructor(QueryGettersClass: IQueryGetters) {
+        this.QueryGetters = QueryGettersClass;
     }
 
     public async getJsonDatas(jsonId: string): Promise<any> {

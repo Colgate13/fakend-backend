@@ -94,12 +94,8 @@ export default class QuerysManager {
             console.log("Json dont created, error code: 8888", err);
         }).then(async () => {
 
-            console.log("Json created");
-
             const docRef = doc(db, "users", this.userId, "json", jsonId);
             const docSnap = await getDoc(docRef)
-
-            console.log(docSnap.data());
 
             return docSnap.data(); // return json data
         })

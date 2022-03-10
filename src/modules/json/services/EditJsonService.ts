@@ -29,7 +29,6 @@ export default class EditJsonService {
             throw new AppError('Object to update are null', 400, 'warn');
         }
 
-
         await this.QuerySetterns.editJson(jsonId, objUpdate).catch(err => {
             return {
                 type: 'error',
@@ -38,7 +37,6 @@ export default class EditJsonService {
                 changes: objUpdate
             };
         });
-
 
         return {
             type: 'success',
