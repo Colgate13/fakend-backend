@@ -25,9 +25,11 @@ export default class EditJsonService {
             }
         })
 
-        if (objUpdate === {}) {
-            throw new AppError('Object to update are null', 400, 'warn');
-        }
+        // if (objUpdate === {} || objUpdate == {}) {
+        //     console.log("objUpdate")
+
+        //     throw new AppError('Object to update are null', 400, 'warn');
+        // }
 
         await this.QuerySetterns.editJson(jsonId, objUpdate).catch(err => {
             return {

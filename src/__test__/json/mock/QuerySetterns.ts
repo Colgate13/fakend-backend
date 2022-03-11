@@ -68,16 +68,42 @@ export class QuerySetternsNullReturn implements IQuerySetterns {
     public async editJson(jsonId: string, data: IEditJson): Promise<any> {
 
 
-        const jsonList = [
-            '75a5d2f7-839e-4777-ad57-810f50113e26',
-            '75a5d2f7-839e-4777-ad57-810f50113e27',
-            '75a5d2f7-839e-4777-ad57-810f50113e28',
-        ]
+        // const jsonList = [
+        //     '75a5d2f7-839e-4777-ad57-810f50113e26',
+        //     '75a5d2f7-839e-4777-ad57-810f50113e27',
+        //     '75a5d2f7-839e-4777-ad57-810f50113e28',
+        // ]
 
-        if (jsonList.includes(jsonId)) {
-            return data;
-        }
+        // if (jsonList.includes(jsonId)) {
+        //     return data;
+        // }
 
         throw new AppError('Json not found', 400);
+    }
+}
+
+export class QuerySetternsEmpty implements IQuerySetterns {
+
+    private userId: string;
+
+    constructor(userId: string) {
+        this.userId = userId;
+    }
+
+    public async createUser(user: ICreateUser): Promise<any> {
+        return user;
+    }
+
+    public async createJson(jsonId: string, {
+        name, json, route, method
+    }: ICreateJson): Promise<any> {
+
+        return undefined;
+    }
+
+    public async editJson(jsonId: string, data: IEditJson): Promise<any> {
+
+        return {};
+
     }
 }
