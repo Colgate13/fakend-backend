@@ -1,5 +1,5 @@
 import { Response, Request } from 'express';
-import { QuerySetterns } from './mock/QuerySetterns'
+import { QuerySetterns, QuerySetternsNullReturn, QuerySetternsEmpty } from './mock/QuerySetterns'
 import EditJsonService from '../../modules/json/services/EditJsonService'
 import AppError from '../../errors/AppError'
 
@@ -116,4 +116,17 @@ describe('Edit endpoint', () => {
 
 
     });
+
+    it("should be able to not edit a dont exist endpoint", async () => {
+
+
+        const editJsonService = new EditJsonService(new QuerySetternsNullReturn('USER_ID'));
+
+        const editJson = await editJsonService.EditJsonDatas('75a5d2f7-839e-4777-ad57-810f50113e26', {
+            json: {},
+        }).catch((err) => {
+            expect(err).toBeInstanceOf(AppError);
+        });
+    });
+
 });
