@@ -14,10 +14,7 @@ class CreateController {
 
         const SigIn = await sigInUserGoogleService.sigInWithCredentials(googleUser);
 
-        return response.status(200).json({
-            message: "User SigIn With Google",
-            token: SigIn
-        });
+        return response.json(SigIn);
 
     }
 }
