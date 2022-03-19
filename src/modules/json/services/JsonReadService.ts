@@ -8,16 +8,16 @@ export default class JsonReadService {
         this.QueryGetters = QueryGettersClass;
     }
 
-    public async getJsonDatas(jsonId: string): Promise<any> {
+    public async jsonData(jsonId: string): Promise<any> {
 
         const Datajsons = await this.QueryGetters.getJsonData(jsonId);
 
         return Datajsons
     }
 
-    public async getAllJson(): Promise<any> {
+    public async alljsonData(): Promise<any> {
 
-        const Datajsons = await this.QueryGetters.getAllJsons();
+        const Datajsons = await this.QueryGetters.alljsonData();
 
         const jsons = Datajsons.map((doc: any) => {
             return {
@@ -38,10 +38,6 @@ export default class JsonReadService {
 
         const Datajsons = await this.QueryGetters.getJson(route);
 
-        try {
-            return JSON.parse(Datajsons[0].data().json);
-        } catch (error) {
-            return Datajsons[0].data().json;
-        }
+        return JSON.parse(Datajsons[0].data().json);
     }
 }

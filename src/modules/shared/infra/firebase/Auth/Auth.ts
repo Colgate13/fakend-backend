@@ -5,17 +5,34 @@ import {
     signInWithEmailAndPassword,
     signInWithCredential,
     GoogleAuthProvider,
+    UserCredential
 } from "firebase/auth";
+import AppError from '../../../../../errors/AppError';
 
 export interface AuthCredentials extends AuthCredential { }
 
-export default class Auth {
+
+/**
+ * @interface IAuth
+ * @desc Reponsável por fazer autenticação com o firebase
+ **/
+
+export interface IAuth {
+    createUserWithMail(email: string, password: string): Promise<any>
+    sigInWithCredential(googleUser: any): Promise<UserCredential>
+    signInEmailAndPassword(email: string, password: string): Promise<UserCredential>
+    verifyToken(route: string): Promise<any>
+}
+
+export default class Auth implements IAuth {
 
     public async createUserWithMail(email: string, password: string): Promise<any> {
         const createUser = await createUserWithEmailAndPassword(auth, email, password);
 
         if (!createUser || !createUser.user || !createUser.user.email) {
-            return null;
+            return {
+                error: 'User not created'
+            };
         }
 
         /**
@@ -35,7 +52,7 @@ export default class Auth {
         return createUser;
     }
 
-    public async sigInWithCredential(googleUser: any): Promise<any> {
+    public async sigInWithCredential(googleUser: any): Promise<UserCredential> {
 
         // Build Firebase credential with the Google ID token.
         const credential = GoogleAuthProvider.credential(googleUser.wc.id_token);
@@ -50,7 +67,7 @@ export default class Auth {
             // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
-            throw Error("Google auth error")
+            throw new AppError("Google auth error", 500, 'error');
         });
 
         // const uuid = (await user).user.uid;
@@ -70,10 +87,10 @@ export default class Auth {
 
         const token = (await user.user.getIdTokenResult()).token;
 
-        return token;
+        return user;
     }
 
-    public async signInEmailAndPassword(email: string, password: string): Promise<any> {
+    public async signInEmailAndPassword(email: string, password: string): Promise<UserCredential> {
         return await signInWithEmailAndPassword(auth, email, password);
     }
 

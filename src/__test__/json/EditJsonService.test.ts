@@ -1,10 +1,10 @@
 import { Response, Request } from 'express';
-import { QuerySetterns, QuerySetternsNullReturn, QuerySetternsEmpty } from './mock/QuerySetterns'
+import { QuerySetters, QuerySettersNullReturn, QuerySettersEmpty } from './mock/QuerySetters'
 import EditJsonService from '../../modules/json/services/EditJsonService'
 import AppError from '../../errors/AppError'
 
 describe('Edit endpoint', () => {
-    it("should be able to edit a exist endpoint. Editing method", async () => {
+    it("Deve ser capaz de editar um endpoint existente. Editing method", async () => {
 
         const jsonExpect = {
             type: 'success',
@@ -15,7 +15,7 @@ describe('Edit endpoint', () => {
             }
         }
 
-        const editJsonService = new EditJsonService(new QuerySetterns('USER_ID'));
+        const editJsonService = new EditJsonService(new QuerySetters('USER_ID'));
 
         const editJson = await editJsonService.EditJsonDatas('75a5d2f7-839e-4777-ad57-810f50113e26', {
             method: 'GET',
@@ -36,7 +36,7 @@ describe('Edit endpoint', () => {
             }
         }
 
-        const editJsonService = new EditJsonService(new QuerySetterns('USER_ID'));
+        const editJsonService = new EditJsonService(new QuerySetters('USER_ID'));
 
         const editJson = await editJsonService.EditJsonDatas('75a5d2f7-839e-4777-ad57-810f50113e26', {
             route: '/users',
@@ -58,7 +58,7 @@ describe('Edit endpoint', () => {
             }
         }
 
-        const editJsonService = new EditJsonService(new QuerySetterns('USER_ID'));
+        const editJsonService = new EditJsonService(new QuerySetters('USER_ID'));
 
         const editJson = await editJsonService.EditJsonDatas('75a5d2f7-839e-4777-ad57-810f50113e26', {
             name: 'hehe',
@@ -82,7 +82,7 @@ describe('Edit endpoint', () => {
             }
         }
 
-        const editJsonService = new EditJsonService(new QuerySetterns('USER_ID'));
+        const editJsonService = new EditJsonService(new QuerySetters('USER_ID'));
 
         const editJson = await editJsonService.EditJsonDatas('75a5d2f7-839e-4777-ad57-810f50113e26', {
             json: {
@@ -106,7 +106,7 @@ describe('Edit endpoint', () => {
             }
         }
 
-        const editJsonService = new EditJsonService(new QuerySetterns('USER_ID'));
+        const editJsonService = new EditJsonService(new QuerySetters('USER_ID'));
 
         const editJson = await editJsonService.EditJsonDatas('75a5d2f7-839e-4777-ad57-810f50113e26', {
             json: {},
@@ -120,7 +120,7 @@ describe('Edit endpoint', () => {
     it("should be able to not edit a dont exist endpoint", async () => {
 
 
-        const editJsonService = new EditJsonService(new QuerySetternsNullReturn('USER_ID'));
+        const editJsonService = new EditJsonService(new QuerySettersNullReturn('USER_ID'));
 
         const editJson = await editJsonService.EditJsonDatas('75a5d2f7-839e-4777-ad57-810f50113e26', {
             json: {},

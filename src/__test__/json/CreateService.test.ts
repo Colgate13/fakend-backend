@@ -1,10 +1,10 @@
 import { Response, Request } from 'express';
-import { QuerySetterns, QuerySetternsNullReturn } from './mock/QuerySetterns'
+import { QuerySetters, QuerySettersNullReturn } from './mock/QuerySetters'
 import CreateService from '../../modules/json/services/CreateService'
 import AppError from '../../errors/AppError'
 
 describe('Create endpoint', () => {
-    it('should be able to create a new endpoint', async () => {
+    it('Deve ser capaz de criar um endpoint', async () => {
 
         const request = {
             body: {
@@ -31,7 +31,7 @@ describe('Create endpoint', () => {
             method: "GET"
         }
 
-        const createService = new CreateService(new QuerySetterns('USER_ID'))
+        const createService = new CreateService(new QuerySetters('USER_ID'))
 
         const createJson = await createService.create({
             name: request.body.name,
@@ -45,7 +45,7 @@ describe('Create endpoint', () => {
         expect(createJson).toEqual(json);
     });
 
-    it('should be able to dont create, Query return undefined', async () => {
+    it('Deve ser capaz de não criar um endpoint, pois o Query ira retornar undefined', async () => {
 
         const request = {
             body: {
@@ -72,7 +72,7 @@ describe('Create endpoint', () => {
             method: "GET"
         }
 
-        const createService = new CreateService(new QuerySetternsNullReturn('USER_ID'))
+        const createService = new CreateService(new QuerySettersNullReturn('USER_ID'))
 
         await createService.create({
             name: request.body.name,
@@ -96,7 +96,7 @@ describe('Create endpoint', () => {
         })
     });
 
-    it('should be able to dont create, TRY undefined name', async () => {
+    it('Deve ser capaz de não criar um endpoint, pois, name esta undefined', async () => {
 
         const request = {
             body: {
@@ -114,7 +114,7 @@ describe('Create endpoint', () => {
             }
         } as Request;
 
-        const createService = new CreateService(new QuerySetterns('USER_ID'))
+        const createService = new CreateService(new QuerySetters('USER_ID'))
 
 
         await createService.create({
@@ -141,7 +141,7 @@ describe('Create endpoint', () => {
     });
 
 
-    it('should be able to dont create, TRY undefined method', async () => {
+    it('Deve ser capaz de não criar um endpoint, pois, method esta undefined', async () => {
 
         const request = {
             body: {
@@ -159,7 +159,7 @@ describe('Create endpoint', () => {
             }
         } as Request;
 
-        const createService = new CreateService(new QuerySetterns('USER_ID'))
+        const createService = new CreateService(new QuerySetters('USER_ID'))
 
 
         await createService.create({
@@ -185,7 +185,7 @@ describe('Create endpoint', () => {
 
     });
 
-    it('should be able to dont create, TRY undefined json', async () => {
+    it('Deve ser capaz de não criar um endpoint, pois, json esta undefined', async () => {
 
         const request = {
             body: {
@@ -195,7 +195,7 @@ describe('Create endpoint', () => {
             }
         } as Request;
 
-        const createService = new CreateService(new QuerySetterns('USER_ID'))
+        const createService = new CreateService(new QuerySetters('USER_ID'))
 
         await createService.create({
             name: request.body.name,
@@ -220,7 +220,7 @@ describe('Create endpoint', () => {
 
     });
 
-    it('should be able to dont create, TRY undefined route', async () => {
+    it('Deve ser capaz de não criar um endpoint, pois, route esta undefined', async () => {
 
         const request = {
             body: {
@@ -238,7 +238,7 @@ describe('Create endpoint', () => {
             }
         } as Request;
 
-        const createService = new CreateService(new QuerySetterns('USER_ID'))
+        const createService = new CreateService(new QuerySetters('USER_ID'))
 
 
         await createService.create({

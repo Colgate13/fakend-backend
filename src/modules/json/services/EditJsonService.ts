@@ -1,13 +1,13 @@
-import { IQuerySetterns } from '../../shared/infra/firebase/Query/QuerySetterns';
+import { IQuerySetters } from '../../shared/infra/firebase/Query/QuerySetters';
 import { IEditJson } from '../../shared/infra/firebase/Query/interfaces/Ijson';
 import AppError from '../../../errors/AppError';
 
 export default class EditJsonService {
 
-    private QuerySetterns: IQuerySetterns;
+    private QuerySetters: IQuerySetters;
 
-    constructor(QuerySetternsClass: IQuerySetterns) {
-        this.QuerySetterns = QuerySetternsClass;
+    constructor(QuerySettersClass: IQuerySetters) {
+        this.QuerySetters = QuerySettersClass;
     }
 
     public async EditJsonDatas(jsonId: string, data: IEditJson): Promise<any> {
@@ -31,7 +31,7 @@ export default class EditJsonService {
         //     throw new AppError('Object to update are null', 400, 'warn');
         // }
 
-        await this.QuerySetterns.editJson(jsonId, objUpdate).catch(err => {
+        await this.QuerySetters.editJson(jsonId, objUpdate).catch(err => {
             return {
                 type: 'error',
                 message: 'Json dont edited',

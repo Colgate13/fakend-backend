@@ -1,15 +1,15 @@
 import * as Yup from 'yup';
 import AppError from '../../../errors/AppError';
-import { IQuerySetterns } from '../../shared/infra/firebase/Query/QuerySetterns';
+import { IQuerySetters } from '../../shared/infra/firebase/Query/QuerySetters';
 import { ICreateJson } from '../../shared/infra/firebase/Query/interfaces/Ijson';
 import { createUuid } from '../../shared/utils/Uuid';
 
 export default class CreateService {
 
-    private QuerySetterns: IQuerySetterns;
+    private QuerySetters: IQuerySetters;
 
-    constructor(QuerySetternsClass: IQuerySetterns) {
-        this.QuerySetterns = QuerySetternsClass;
+    constructor(QuerySettersClass: IQuerySetters) {
+        this.QuerySetters = QuerySettersClass;
     }
 
     public async create({ name, route, json, method }: ICreateJson): Promise<any> {
@@ -37,7 +37,7 @@ export default class CreateService {
 
         const uuid = await createUuid();
 
-        const create = await this.QuerySetterns.createJson(uuid, {
+        const create = await this.QuerySetters.createJson(uuid, {
             name: name,
             route: route,
             json: jsonStringify,

@@ -2,18 +2,18 @@ import AppError from '../../../errors/AppError';
 import { ICreateJson, ICreateUser, IEditJson } from '../../../modules/shared/infra/firebase/Query/interfaces/Ijson'
 
 /**
- * @interface IQuerySetterns
+ * @interface IQuerySetters
  * @desc Responsável por setar informações sobre jsons
  **/
 
-export interface IQuerySetterns {
+export interface IQuerySetters {
     createUser(user: ICreateUser): Promise<any>
     createJson(jsonId: string, { name, json, route, method }: ICreateJson): Promise<any>
     editJson(jsonId: string, data: IEditJson): Promise<any>
 }
 
 
-export class QuerySetterns implements IQuerySetterns {
+export class QuerySetters implements IQuerySetters {
 
     private userId: string;
 
@@ -46,7 +46,7 @@ export class QuerySetterns implements IQuerySetterns {
     }
 }
 
-export class QuerySetternsNullReturn implements IQuerySetterns {
+export class QuerySettersNullReturn implements IQuerySetters {
 
     private userId: string;
 
@@ -82,7 +82,7 @@ export class QuerySetternsNullReturn implements IQuerySetterns {
     }
 }
 
-export class QuerySetternsEmpty implements IQuerySetterns {
+export class QuerySettersEmpty implements IQuerySetters {
 
     private userId: string;
 

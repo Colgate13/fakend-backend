@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 import EditJsonService from "../../../services/EditJsonService";
 import { IEditJson } from '../../../../shared/infra/firebase/Query/interfaces/Ijson';
-import { QuerySetterns } from '../../../../shared/infra/firebase/Query/QuerySetterns';
+import { QuerySetters } from '../../../../shared/infra/firebase/Query/QuerySetters';
 
 class EditJsonController {
     public async editJson(
@@ -16,7 +16,7 @@ class EditJsonController {
             name, json, method, route
         }
 
-        const editJsonService = new EditJsonService(new QuerySetterns(userUid));
+        const editJsonService = new EditJsonService(new QuerySetters(userUid));
         const editJson = await editJsonService.EditJsonDatas(jsonId, dataJson);
 
         return response.status(200).json(editJson);
