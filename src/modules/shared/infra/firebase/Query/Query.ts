@@ -18,7 +18,7 @@ export default class Query extends QuerysManager {
         return await this.GETUser();
     }
 
-    public async getAllJsons(): Promise<any> {
+    public async alljsonData(): Promise<any> {
         return await this.GETallJsons();
     }
 

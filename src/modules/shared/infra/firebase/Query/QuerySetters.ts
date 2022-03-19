@@ -2,18 +2,18 @@ import Query from './Query';
 import { ICreateJson, ICreateUser, IEditJson } from './interfaces/Ijson'
 
 /**
- * @interface IQuerySetterns
+ * @interface IQuerySetters
  * @desc Responsável por setar informações sobre jsons
  **/
 
-export interface IQuerySetterns {
+export interface IQuerySetters {
     createUser(user: ICreateUser): Promise<any>
     createJson(jsonId: string, { name, json, route, method }: ICreateJson): Promise<any>
     editJson(jsonId: string, data: IEditJson): Promise<any>
 }
 
 
-export class QuerySetterns extends Query implements IQuerySetterns {
+export class QuerySetters extends Query implements IQuerySetters {
 
     constructor(userId: string) {
         super(userId);

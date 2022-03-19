@@ -7,7 +7,7 @@ import Query from './Query';
 
 export interface IQueryGetters {
     getUser(): Promise<any>
-    getAllJsons(): Promise<any>
+    alljsonData(): Promise<any>
     getJsonData(id: string): Promise<any>
     getJson(route: string): Promise<any>
 }
@@ -23,7 +23,7 @@ export class QueryGetters extends Query implements IQueryGetters {
         return await this.GETUser();
     }
 
-    public async getAllJsons(): Promise<any> {
+    public async alljsonData(): Promise<any> {
         return await this.GETallJsons();
     }
 

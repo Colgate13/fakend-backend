@@ -17,8 +17,8 @@ routes.get('/json/get/:jsonId', middlewares, readJsonController.getJsonDatas);
 
 routes.get('/json/edit/:jsonId', middlewares, editJsonController.editJson);
 
-routes.get("/json/list", middlewares, readJsonController.getAllJson);
-routes.get("/json", middlewares, readJsonController.getAllJson);
+routes.get("/json/list", middlewares, readJsonController.alljsonData);
+routes.get("/json", middlewares, readJsonController.alljsonData);
 
 routes.all("/json/:IdUser/*", readJsonController.getJson);
 routes.all("/json/:IdUser", readJsonController.getJson);

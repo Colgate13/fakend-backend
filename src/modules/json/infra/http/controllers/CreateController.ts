@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import AppError from '../../../../../errors/AppError';
 import { Response, Request } from 'express';
 import CreateService from "../../../services/CreateService";
-import { QuerySetterns } from '../../../../shared/infra/firebase/Query/QuerySetterns';
+import { QuerySetters } from '../../../../shared/infra/firebase/Query/QuerySetters';
 
 
 class CreateController {
@@ -13,7 +13,7 @@ class CreateController {
         const { json, name, route, method } = request.body;
         const userUid = request.user.uid;
 
-        const createService = new CreateService(new QuerySetterns(userUid));
+        const createService = new CreateService(new QuerySetters(userUid));
         const create = await createService.create({
             name,
             route,

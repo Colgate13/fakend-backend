@@ -13,17 +13,17 @@ class ReadJsonController {
         const { jsonId } = request.params;
 
         const jsonReadService = new JsonReadService(new QueryGetters(request.user.uid));
-        const data = await jsonReadService.getJsonDatas(jsonId);
+        const data = await jsonReadService.jsonData(jsonId);
 
         return response.status(200).json(data);
     }
 
-    public async getAllJson(
+    public async alljsonData(
         request: Request,
         response: Response): Promise<any> {
 
         const jsonReadService = new JsonReadService(new QueryGetters(request.user.uid));
-        const data = await jsonReadService.getAllJson();
+        const data = await jsonReadService.alljsonData();
 
         return response.status(200).json(data);
     }

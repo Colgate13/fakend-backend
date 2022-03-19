@@ -9,7 +9,8 @@
     "start": "node dist/server.js",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch --maxWorkers=1",
+    "test:clear": "jest --clearCache"
   },
   "keywords": [],
   "author": "",
