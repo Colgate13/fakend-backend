@@ -35,6 +35,9 @@
             //console.log('Image URL: ' + profile.getImageUrl());
             console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
             console.log('Id_token: ' + id_token); // This is null if the 'email' scope is not present.
+            console.log("googleUser Inicio => ");
+            console.log(googleUser);
+            console.log("<= GoogleUser final");
             SendGoogleUserToBackEnd(googleUser);
         }
     </script>
