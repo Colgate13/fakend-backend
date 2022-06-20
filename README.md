@@ -23,6 +23,8 @@ A website made by developers for developers, with our tool you will be able to s
 ```yarn 
 git clone https://github.com/SmartsFields/fakend-backend.git
 npm ci i
+npm run-script test:watch
 npm run-script dev
+
 $ > Server is running in 3000!
 ```
