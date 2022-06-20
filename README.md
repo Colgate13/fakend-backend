@@ -38,3 +38,8 @@ npm run-script dev
 
 $ > Server is running in 3000!
 ```
+
+
+### Obs
+
+All keys/token expired/revokes
