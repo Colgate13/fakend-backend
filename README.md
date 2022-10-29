@@ -31,7 +31,7 @@ To perform the integration with Firebase Auth, a module was created calling Auth
 ## Installation and run
 
 ```yarn 
-git clone https://github.com/SmartsFields/fakend-backend.git
+git clone https://github.com/Colgate13/fakend-backend.git
 npm ci i
 npm run-script test:watch
 npm run-script dev
